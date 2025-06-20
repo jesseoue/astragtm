@@ -3,7 +3,7 @@
 import { HeroSection } from "@/components/sections/hero-section"
 import { ClientLogoBar } from "@/components/sections/client-logo-bar"
 import { HowItWorks } from "@/components/sections/how-it-works"
-import { TestimonialsSlider } from "@/components/sections/testimonials-slider"
+import { WallOfLove } from "@/components/sections/wall-of-love"
 import { PackagesGrid } from "@/components/sections/packages-grid"
 import { TechStackCarousel } from "@/components/sections/tech-stack-carousel"
 import { ResourcesSection } from "@/components/sections/resources-section"
@@ -82,7 +82,7 @@ export default function HomePage() {
       </section>
       
       <HowItWorks />
-      <TestimonialsSlider />
+      <WallOfLove />
       <PackagesGrid />
       <TechStackCarousel />
       <ResourcesSection />
