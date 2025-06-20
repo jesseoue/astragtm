@@ -71,6 +71,7 @@ export default function HomePage() {
         <Navbar />
         <main className="flex-grow">
           <HeroSection />
+          <ClientLogoBar />
           
           {/* ROI Calculator Section - Moved up and improved spacing */}
           <section id="roi-calculator" className="section-padding section-bg-primary relative overflow-hidden">
@@ -101,7 +102,6 @@ export default function HomePage() {
             </div>
           </section>
           
-          <ClientLogoBar />
           <HowItWorks />
           <TestimonialsSlider />
           <PackagesGrid />
