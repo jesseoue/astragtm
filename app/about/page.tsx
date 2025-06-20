@@ -60,7 +60,7 @@ const milestones = [
   { year: "2021", event: "Founded Astra GTM", description: "Started with a mission to democratize enterprise-level GTM systems for startups" },
   { year: "2022", event: "First 50 Clients", description: "Helped 50 startups implement AI-powered GTM systems, generating $15M in pipeline" },
   { year: "2023", event: "GTM Framework Launch", description: "Released our proprietary GTM optimization framework, adopted by 500+ companies" },
-  { year: "2024", event: "Series of Firsts", description: "First to integrate GPT-4 for lead scoring, first automated attribution system for startups" }
+  { year: "2025", event: "Industry Leadership", description: "Leading the next generation of AI-powered GTM automation, setting new standards for SaaS growth" }
 ]
 
 export default function AboutPage() {

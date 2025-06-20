@@ -165,15 +165,13 @@ export function ExitIntentPopup({ onEmailCapture, className }: ExitIntentPopupPr
           {!isSubmitted ? (
             <>
               <CardTitle className="text-3xl font-bold text-star-white mb-4 leading-tight">
-                Don&apos;t Miss Out on <span className="text-gradient bg-gradient-to-r from-electric-blue to-purple-400 bg-clip-text text-transparent">2024&apos;s #1</span> SaaS Growth Blueprint
+                🚨 WAIT! Don't Miss Out on <span className="text-gradient bg-gradient-to-r from-electric-blue to-purple-400 bg-clip-text text-transparent">2025's #1</span> SaaS Growth Blueprint! 🚨
               </CardTitle>
               <CardDescription className="text-star-white/80 text-lg leading-relaxed">
-                Before you leave, grab our <span className="text-electric-blue font-semibold">exclusive playbook</span> that helped 
-                <span className="text-electric-blue font-semibold"> 500+ SaaS companies</span> generate 
-                <span className="text-green-400 font-bold"> $2.4B+ in revenue.</span>
-                <br />
-                <span className="text-sm text-star-white/60 mt-2 block">
-                  Usually $497 • Free for limited time
+                <span className="block text-xl font-bold text-electric-blue mb-2">⚡ EXCLUSIVE: Limited Time Only! ⚡</span>
+                Before you leave, grab our <strong>explosive playbook</strong> that helped 500+ SaaS companies generate <span className="text-electric-blue font-bold">$2.4B+ in revenue</span> in 2024!
+                <span className="block mt-3 text-yellow-400 font-bold">
+                  🔥 Usually $497 • FREE for next 24 hours only! 🔥
                 </span>
               </CardDescription>
             </>

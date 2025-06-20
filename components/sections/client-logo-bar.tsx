@@ -4,12 +4,12 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const trustedCompanies = [
-  { name: "Stripe", domain: "stripe.com" },
-  { name: "Slack", domain: "slack.com" },
-  { name: "Zoom", domain: "zoom.us" },
-  { name: "HubSpot", domain: "hubspot.com" },
-  { name: "Shopify", domain: "shopify.com" },
-  { name: "Salesforce", domain: "salesforce.com" }
+  { name: "Stripe", domain: "stripe.com", logo: "/stripe-logo.png" },
+  { name: "Slack", domain: "slack.com", logo: "/slack-logo.png" },
+  { name: "Zoom", domain: "zoom.us", logo: "/zoom-logo.png" },
+  { name: "HubSpot", domain: "hubspot.com", logo: "/hubspot-logo.png" },
+  { name: "Shopify", domain: "shopify.com", logo: "/shopify-logo.png" },
+  { name: "Salesforce", domain: "salesforce.com", logo: "/salesforce-logo.png" }
 ]
 
 interface ClientLogoBarProps {
@@ -32,7 +32,7 @@ export function ClientLogoBar({ className }: ClientLogoBarProps) {
             <div key={company.domain} className="group hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100">
               <div className="w-28 h-14 relative flex items-center justify-center">
                 <Image
-                  src={`https://logo.clearbit.com/${company.domain}`}
+                  src={company.logo}
                   alt={`${company.name} logo`}
                   width={112}
                   height={56}

@@ -1,435 +1,536 @@
 "use client"
 
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
-import { CTAButton } from "@/components/ui/cta-button"
-import { Card, CardContent } from "@/components/ui/card"
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, ArrowRight, Search, Filter, BookOpen, TrendingUp, Users, Lightbulb } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
+import { Input } from "@/components/ui/input"
+import { 
+  BookOpen, 
+  Mic, 
+  Calendar, 
+  Mail, 
+  Download, 
+  Play, 
+  Clock, 
+  Users,
+  TrendingUp,
+  Zap,
+  Target,
+  Rocket,
+  Calculator,
+  FileText,
+  Video,
+  Search,
+  Filter,
+  ChevronRight,
+  Star,
+  ArrowRight
+} from "lucide-react"
+import Link from "next/link"
 
-const blogPosts = [
+const contentCategories = [
+  { id: "all", label: "All Resources", icon: BookOpen },
+  { id: "guides", label: "Growth Guides", icon: Target },
+  { id: "tools", label: "Free Tools", icon: Calculator },
+  { id: "podcast", label: "Podcast", icon: Mic },
+  { id: "webinars", label: "Webinars", icon: Video },
+  { id: "case-studies", label: "Case Studies", icon: TrendingUp },
+  { id: "templates", label: "Templates", icon: FileText },
+]
+
+const featuredContent = [
   {
-    id: "ai-gtm-transformation-2024",
-    title: "How AI is Transforming B2B SaaS GTM in 2024",
-    excerpt: "Discover the latest AI-powered strategies that are revolutionizing how B2B startups approach go-to-market operations and scale revenue predictably.",
-    category: "AI & Automation",
-    readTime: "8 min read",
-    publishDate: "2024-01-15",
-    author: {
-      name: "Sarah Chen",
-      role: "Head of GTM Strategy",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: true,
-    tags: ["AI", "GTM Strategy", "B2B Sales", "Revenue Growth"]
+    id: "growth-playbook-2025",
+    title: "The Complete SaaS Growth Playbook 2025",
+    description: "The definitive 127-page guide that helped 500+ SaaS companies scale from $10K to $1M+ MRR",
+    type: "guide",
+    category: "guides",
+    downloadCount: "12,847",
+    rating: 4.9,
+    publishDate: "2025-01-15",
+    readTime: "45 min",
+    author: "Alex Chen, Head of Growth",
+    image: "/placeholder-f8li9.png",
+    tags: ["Growth", "Scaling", "Revenue"],
+    downloadUrl: "#",
+    featured: true
   },
   {
-    id: "lead-scoring-best-practices",
-    title: "Lead Scoring Mastery: The Complete B2B SaaS Guide",
-    excerpt: "Learn how to implement predictive lead scoring models that increase conversion rates by 340% and accelerate your sales cycle dramatically.",
-    category: "Lead Generation",
-    readTime: "12 min read",
-    publishDate: "2024-01-10",
-    author: {
-      name: "Marcus Rodriguez",
-      role: "Senior Revenue Consultant",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: false,
-    tags: ["Lead Scoring", "Sales", "CRM", "Conversion Optimization"]
+    id: "roi-calculator-tool",
+    title: "SaaS GTM ROI Calculator 2025",
+    description: "Calculate your exact revenue potential with our advanced GTM optimization calculator. Used by 1000+ companies.",
+    type: "tool",
+    category: "tools",
+    downloadCount: "8,493",
+    rating: 4.8,
+    publishDate: "2025-01-10",
+    author: "Sarah Johnson, Data Scientist",
+    image: "/placeholder-rbuq0.png",
+    tags: ["Calculator", "ROI", "Growth"],
+    downloadUrl: "#roi-calculator",
+    featured: true
   },
   {
-    id: "marketing-automation-roi",
-    title: "Marketing Automation ROI: $2.4M Revenue Case Study",
-    excerpt: "Step-by-step framework showing how one SaaS company used our automation strategy to generate $2.4M in additional revenue within 8 months.",
-    category: "Marketing Automation",
-    readTime: "15 min read",
-    publishDate: "2024-01-05",
-    author: {
-      name: "Alex Chen",
-      role: "Founder & CEO",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: false,
-    tags: ["Marketing Automation", "ROI", "Case Study", "Revenue Growth"]
-  },
-  {
-    id: "sales-pipeline-optimization",
-    title: "5 Data-Driven Ways to Optimize Your Sales Pipeline",
-    excerpt: "Actionable strategies to identify bottlenecks, improve conversion rates by 180%, and accelerate deal velocity using proven frameworks.",
-    category: "Sales Operations",
-    readTime: "10 min read",
-    publishDate: "2023-12-28",
-    author: {
-      name: "Jennifer Park",
-      role: "Revenue Operations Lead",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: false,
-    tags: ["Sales Pipeline", "Data Analytics", "Revenue Ops", "Conversion"]
-  },
-  {
-    id: "saas-growth-strategies-2024",
-    title: "SaaS Growth Strategies That Actually Work in 2024",
-    excerpt: "Proven growth strategies from 500+ SaaS companies. Learn what's working now and what's not in the current market landscape.",
-    category: "Growth Strategy",
-    readTime: "14 min read",
-    publishDate: "2023-12-20",
-    author: {
-      name: "David Kim",
-      role: "Growth Strategy Director",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: false,
-    tags: ["Growth Strategy", "SaaS", "Market Trends", "Revenue"]
-  },
-  {
-    id: "startup-gtm-strategy",
-    title: "Building Your First GTM Strategy: A Startup's Playbook",
-    excerpt: "From product-market fit to scalable growth - complete framework for building a winning go-to-market strategy from the ground up.",
-    category: "GTM Strategy",
-    readTime: "18 min read",
-    publishDate: "2023-12-15",
-    author: {
-      name: "Sarah Chen",
-      role: "Head of GTM Strategy",
-      avatar: "/placeholder-user.jpg"
-    },
-    image: "/placeholder.jpg",
-    featured: false,
-    tags: ["GTM Strategy", "Startups", "Product-Market Fit", "Growth"]
+    id: "scale-or-fail-podcast",
+    title: "Scale or Fail Podcast: Latest Episodes",
+    description: "Weekly deep-dives into SaaS growth with founders who've scaled from 0 to $100M+. 50K+ weekly listeners.",
+    type: "podcast",
+    category: "podcast",
+    episodeCount: "127",
+    rating: 4.9,
+    publishDate: "2025-01-12",
+    author: "Marcus Rivera, CEO",
+    image: "/placeholder-646gu.png",
+    tags: ["Podcast", "Founders", "Scaling"],
+    downloadUrl: "#",
+    featured: true
   }
 ]
 
-const categories = [
-  { name: "All Posts", count: 6, icon: <BookOpen className="w-4 h-4" /> },
-  { name: "GTM Strategy", count: 2, icon: <TrendingUp className="w-4 h-4" /> },
-  { name: "AI & Automation", count: 1, icon: <Lightbulb className="w-4 h-4" /> },
-  { name: "Lead Generation", count: 1, icon: <Users className="w-4 h-4" /> },
-  { name: "Marketing Automation", count: 1, icon: <TrendingUp className="w-4 h-4" /> },
-  { name: "Sales Operations", count: 1, icon: <Users className="w-4 h-4" /> },
+const guides = [
+  {
+    id: "lead-scoring-ai-2025",
+    title: "AI-Powered Lead Scoring That Actually Works",
+    description: "Transform your lead qualification with our proven AI framework. Increase conversion rates by 340%.",
+    type: "guide",
+    category: "guides",
+    downloadCount: "6,234",
+    rating: 4.8,
+    publishDate: "2025-01-08",
+    readTime: "25 min",
+    author: "Dr. Emily Zhang, AI Strategist",
+    tags: ["AI", "Lead Scoring", "Conversion"],
+    downloadUrl: "#"
+  },
+  {
+    id: "onboarding-optimization-2025",
+    title: "The 7-Day User Onboarding Optimization Framework",
+    description: "Reduce churn by 67% and increase activation by 89% with our battle-tested onboarding system.",
+    type: "guide",
+    category: "guides",
+    downloadCount: "9,847",
+    rating: 4.9,
+    publishDate: "2025-01-05",
+    readTime: "35 min",
+    author: "Jake Thompson, UX Director",
+    tags: ["Onboarding", "Retention", "UX"],
+    downloadUrl: "#"
+  },
+  {
+    id: "pricing-psychology-2025",
+    title: "SaaS Pricing Psychology: The $10M Framework",
+    description: "The pricing strategies used by unicorn SaaS companies to maximize revenue per customer.",
+    type: "guide",
+    category: "guides",
+    downloadCount: "4,567",
+    rating: 4.7,
+    publishDate: "2025-01-03",
+    readTime: "30 min",
+    author: "Lisa Park, Pricing Strategist",
+    tags: ["Pricing", "Psychology", "Revenue"],
+    downloadUrl: "#"
+  }
 ]
 
-const featuredStats = [
-  { value: "500+", label: "SaaS Companies Helped", icon: "🚀" },
-  { value: "340%", label: "Average ROI Increase", icon: "📈" },
-  { value: "$2.4B+", label: "Revenue Generated", icon: "💰" },
-  { value: "50+", label: "Expert Insights", icon: "💡" },
+const tools = [
+  {
+    id: "churn-predictor",
+    title: "AI Churn Prediction Calculator",
+    description: "Identify at-risk customers 90 days before they churn. Save 45% more revenue.",
+    type: "tool",
+    category: "tools",
+    downloadCount: "3,421",
+    rating: 4.6,
+    publishDate: "2025-01-07",
+    author: "Tech Team",
+    tags: ["Churn", "AI", "Prediction"],
+    downloadUrl: "#"
+  },
+  {
+    id: "growth-metrics-dashboard",
+    title: "SaaS Growth Metrics Dashboard Template",
+    description: "Track the 23 essential SaaS metrics that matter most. Includes Google Sheets & Notion versions.",
+    type: "tool",
+    category: "tools",
+    downloadCount: "7,892",
+    rating: 4.8,
+    publishDate: "2025-01-04",
+    author: "Analytics Team",
+    tags: ["Metrics", "Dashboard", "Analytics"],
+    downloadUrl: "#"
+  }
 ]
 
-export default function BlogPage() {
-  const featuredPost = blogPosts.find(post => post.featured)
-  const regularPosts = blogPosts.filter(post => !post.featured)
+const podcastEpisodes = [
+  {
+    id: "episode-127",
+    title: "From $0 to $50M ARR: Slack's Growth Secrets",
+    description: "Stewart Butterfield reveals the untold growth strategies that built Slack into a $27B company.",
+    type: "podcast",
+    category: "podcast",
+    duration: "58 min",
+    rating: 4.9,
+    publishDate: "2025-01-12",
+    listenerCount: "23,847",
+    author: "Stewart Butterfield, Co-founder of Slack",
+    tags: ["Scaling", "B2B SaaS", "Leadership"],
+    downloadUrl: "#"
+  },
+  {
+    id: "episode-126", 
+    title: "The $100M Product-Led Growth Playbook",
+    description: "How Calendly's CEO scaled to $100M ARR with zero sales team using PLG strategies.",
+    type: "podcast",
+    category: "podcast",
+    duration: "45 min",
+    rating: 4.8,
+    publishDate: "2025-01-05",
+    listenerCount: "19,234",
+    author: "Tope Awotona, CEO of Calendly",
+    tags: ["PLG", "No Sales", "Product"],
+    downloadUrl: "#"
+  }
+]
+
+const webinars = [
+  {
+    id: "ai-sales-automation-2025",
+    title: "AI Sales Automation: 10x Your Pipeline in 90 Days",
+    description: "Live masterclass: How to implement AI sales automation that generated $50M+ in new pipeline.",
+    type: "webinar",
+    category: "webinars",
+    datetime: "Jan 25, 2025 • 2:00 PM EST",
+    duration: "90 min",
+    rating: 4.9,
+    attendeeCount: "1,247",
+    author: "Marcus Rivera & Alex Chen",
+    tags: ["AI", "Sales", "Automation"],
+    registerUrl: "#"
+  },
+  {
+    id: "pricing-optimization-workshop",
+    title: "Pricing Optimization Workshop: Double Your Revenue",
+    description: "Interactive workshop on advanced pricing strategies that increased ARPU by 156% on average.",
+    type: "webinar", 
+    category: "webinars",
+    datetime: "Feb 8, 2025 • 1:00 PM EST",
+    duration: "120 min",
+    rating: 4.8,
+    attendeeCount: "892",
+    author: "Lisa Park & Sarah Johnson",
+    tags: ["Pricing", "Revenue", "Strategy"],
+    registerUrl: "#"
+  }
+]
+
+const caseStudies = [
+  {
+    id: "zendesk-450-percent-growth",
+    title: "How Zendesk Achieved 450% Pipeline Growth in 6 Months",
+    description: "The complete breakdown of how we helped Zendesk optimize their GTM engine and scale from $50M to $200M ARR.",
+    type: "case-study",
+    category: "case-studies", 
+    result: "450% Pipeline Growth",
+    timeframe: "6 months",
+    industry: "Customer Support SaaS",
+    rating: 4.9,
+    publishDate: "2025-01-10",
+    author: "Growth Team",
+    tags: ["B2B SaaS", "Pipeline", "GTM"],
+    downloadUrl: "#"
+  },
+  {
+    id: "stripe-revenue-optimization", 
+    title: "Stripe's $2.4B Revenue Optimization Strategy",
+    description: "Inside look at how Stripe uses AI-powered GTM optimization to maintain 40%+ growth at scale.",
+    type: "case-study",
+    category: "case-studies",
+    result: "$2.4B Revenue Impact", 
+    timeframe: "12 months",
+    industry: "Payments SaaS",
+    rating: 4.8,
+    publishDate: "2025-01-08",
+    author: "Strategy Team",
+    tags: ["Payments", "Scale", "Revenue"],
+    downloadUrl: "#"
+  }
+]
+
+export default function ResourcesHub() {
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const allContent = [...featuredContent, ...guides, ...tools, ...podcastEpisodes, ...webinars, ...caseStudies]
+  
+  const filteredContent = allContent.filter(item => {
+    const matchesCategory = selectedCategory === "all" || item.category === selectedCategory
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    return matchesCategory && matchesSearch
+  })
 
   return (
-    <div className="flex flex-col min-h-screen bg-dark-navy">
-      <Navbar />
-      
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="py-20 md:py-32">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-5xl mx-auto mb-16">
-              <Badge className="bg-electric-blue/10 text-electric-blue border-electric-blue/20 mb-6">
-                <BookOpen className="w-4 h-4 mr-2" />
-                Growth Resources
-              </Badge>
-              
-              <h1 className="text-4xl md:text-6xl font-bold text-star-white mb-6">
-                SaaS Growth <span className="text-gradient bg-gradient-to-r from-electric-blue to-purple-400 bg-clip-text text-transparent">Insights</span> & Resources
-              </h1>
-              
-              <p className="text-xl text-star-white/80 mb-8 max-w-3xl mx-auto">
-                Expert insights, proven strategies, and actionable frameworks from helping 500+ SaaS companies 
-                scale their revenue. Learn what actually works in today's market.
-              </p>
+    <div className="min-h-screen section-bg-primary">
+      {/* Hero Section */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-electric-blue/10 via-transparent to-transparent"></div>
+        
+        <div className="container mx-auto container-padding relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-electric-blue/10 border border-electric-blue/20 rounded-full text-electric-blue text-sm font-medium mb-6">
+              <Rocket className="mr-2 h-4 w-4" />
+              2025's #1 SaaS Growth Resource Hub
+            </div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold text-star-white mb-6 leading-tight">
+              Growth Resources That
+              <span className="relative block">
+                <span className="text-gradient bg-gradient-to-r from-electric-blue via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Actually Work
+                </span>
+                <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-electric-blue/50 via-purple-400/50 to-pink-400/50 rounded-full"></div>
+              </span>
+            </h1>
+            
+            <p className="text-xl text-star-white/80 mb-8 leading-relaxed">
+              Free tools, guides, and insights used by 500+ SaaS companies to scale from $10K to $100M+ ARR.
+              <span className="block mt-2 text-electric-blue font-semibold">
+                🚀 Downloaded 50,000+ times • ⭐ 4.9/5 average rating
+              </span>
+            </p>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                {featuredStats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl mb-2">{stat.icon}</div>
-                    <div className="text-2xl md:text-3xl font-bold text-electric-blue mb-1">
-                      {stat.value}
+            {/* Newsletter Signup */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-lg mx-auto mb-8">
+              <Input 
+                placeholder="Enter email for weekly growth insights..."
+                className="flex-1 bg-dark-navy/50 border-electric-blue/30 text-star-white placeholder:text-star-white/50"
+              />
+              <Button className="bg-gradient-to-r from-electric-blue to-purple-400 text-dark-navy font-bold px-8 hover:scale-105 transition-transform">
+                <Mail className="mr-2 h-4 w-4" />
+                Get Free Weekly Tips
+              </Button>
+            </div>
+
+            <p className="text-star-white/60 text-sm">
+              Join 12,000+ SaaS founders getting weekly growth insights • No spam, unsubscribe anytime
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Search and Filters */}
+      <section className="py-8 border-b border-star-white/10">
+        <div className="container mx-auto container-padding">
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+            {/* Search */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-star-white/50 h-4 w-4" />
+              <Input 
+                placeholder="Search resources, tools, guides..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-dark-navy/50 border-electric-blue/30 text-star-white placeholder:text-star-white/50"
+              />
+            </div>
+
+            {/* Category Filters */}
+            <div className="flex flex-wrap gap-2">
+              {contentCategories.map((category) => (
+                <Button
+                  key={category.id}
+                  variant={selectedCategory === category.id ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={selectedCategory === category.id 
+                    ? "bg-electric-blue text-dark-navy" 
+                    : "border-electric-blue/30 text-electric-blue hover:bg-electric-blue/10"
+                  }
+                >
+                  <category.icon className="mr-2 h-4 w-4" />
+                  {category.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Content */}
+      {selectedCategory === "all" && (
+        <section className="py-16">
+          <div className="container mx-auto container-padding">
+            <div className="flex items-center gap-3 mb-12">
+              <Star className="h-6 w-6 text-yellow-400" />
+              <h2 className="text-3xl font-bold text-star-white">Featured Resources</h2>
+              <Badge className="bg-electric-blue/20 text-electric-blue border-electric-blue/30">Most Popular</Badge>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredContent.map((item) => (
+                <Card key={item.id} className="group hover:scale-105 transition-all duration-300 bg-dark-navy/50 border-electric-blue/20 overflow-hidden">
+                  <div className="relative">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-electric-blue text-dark-navy font-bold">
+                        {item.type === "guide" && <BookOpen className="mr-1 h-3 w-3" />}
+                        {item.type === "tool" && <Calculator className="mr-1 h-3 w-3" />}
+                        {item.type === "podcast" && <Mic className="mr-1 h-3 w-3" />}
+                        {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+                      </Badge>
                     </div>
-                    <div className="text-star-white/60 text-sm">
-                      {stat.label}
+                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
+                      <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                      <span className="text-white text-xs font-medium">{item.rating}</span>
                     </div>
                   </div>
-                ))}
-              </div>
-              
-              {/* Search and Filter */}
-              <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-8">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-star-white/50 w-5 h-5" />
-                  <Input 
-                    placeholder="Search growth insights..." 
-                    className="pl-10 bg-dark-navy/50 border-star-white/20 text-star-white placeholder:text-star-white/50 focus:border-electric-blue"
-                  />
-                </div>
-                <Button variant="outline" className="border-electric-blue/30 text-electric-blue hover:bg-electric-blue/10">
-                  <Filter className="w-4 h-4 mr-2" />
-                  Filter
-                </Button>
-              </div>
-
-              {/* Category Tags */}
-              <div className="flex flex-wrap gap-3 justify-center">
-                {categories.map((category, index) => (
-                  <Badge 
-                    key={index}
-                    variant={index === 0 ? "default" : "outline"}
-                    className={`cursor-pointer transition-all duration-300 ${index === 0 
-                      ? "bg-electric-blue text-dark-navy hover:bg-electric-blue/90" 
-                      : "border-star-white/20 text-star-white/70 hover:border-electric-blue/50 hover:text-electric-blue hover:bg-electric-blue/10"
-                    }`}
-                  >
-                    {category.icon}
-                    <span className="ml-2">{category.name}</span>
-                    <span className="ml-2 text-xs opacity-70">({category.count})</span>
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Article */}
-        {featuredPost && (
-          <section className="pb-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="relative max-w-6xl mx-auto">
-                <div className="absolute -top-4 left-8 z-10">
-                  <Badge className="bg-electric-blue text-dark-navy font-bold px-4 py-2 shadow-lg">
-                    ✨ Featured Article
-                  </Badge>
-                </div>
-                
-                <Card className="overflow-hidden bg-gradient-to-br from-electric-blue/5 to-electric-blue/10 border-electric-blue/30 shadow-2xl hover:shadow-electric-blue/20 transition-all duration-500">
-                  <CardContent className="p-0">
-                    <div className="grid lg:grid-cols-2 gap-0">
-                      <div className="relative h-64 lg:h-full min-h-[300px]">
-                        <Image
-                          src={featuredPost.image}
-                          alt={featuredPost.title}
-                          fill
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/90 via-dark-navy/20 to-transparent" />
-                        <div className="absolute top-4 left-4">
-                          <Badge className="bg-electric-blue/20 text-electric-blue border-electric-blue/30 backdrop-blur-sm">
-                            {featuredPost.category}
-                          </Badge>
-                        </div>
-                      </div>
-                      
-                      <div className="p-8 lg:p-12">
-                        <div className="flex items-center gap-4 mb-6 text-star-white/60 text-sm">
-                          <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {new Date(featuredPost.publishDate).toLocaleDateString('en-US', { 
-                              month: 'long', 
-                              day: 'numeric',
-                              year: 'numeric'
-                            })}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="w-4 h-4 mr-1" />
-                            {featuredPost.readTime}
-                          </div>
-                        </div>
-                        
-                        <h2 className="text-3xl lg:text-4xl font-bold text-star-white mb-6 leading-tight">
-                          {featuredPost.title}
-                        </h2>
-                        
-                        <p className="text-star-white/80 mb-8 leading-relaxed text-lg">
-                          {featuredPost.excerpt}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mb-8">
-                          {featuredPost.tags.map((tag, index) => (
-                            <Badge key={index} variant="outline" className="text-xs border-electric-blue/30 text-electric-blue">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                              <span className="text-electric-blue font-bold">
-                                {featuredPost.author.name.split(' ').map(n => n[0]).join('')}
-                              </span>
-                            </div>
-                            <div>
-                              <div className="text-star-white font-semibold">
-                                {featuredPost.author.name}
-                              </div>
-                              <div className="text-star-white/60 text-sm">
-                                {featuredPost.author.role}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <CTAButton
-                            intent="primary"
-                            icon="arrow"
-                            href={`/blog/${featuredPost.id}`}
-                            className="shadow-lg hover:shadow-electric-blue/30"
-                          >
-                            Read Full Article
-                          </CTAButton>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Article Grid */}
-        <section className="pb-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-star-white text-center mb-12">
-                Latest Growth Insights
-              </h2>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {regularPosts.map((post, index) => (
-                  <Card 
-                    key={post.id} 
-                    className="bg-dark-navy/50 border-star-white/10 hover:border-electric-blue/30 transition-all duration-500 h-full group hover:scale-105 hover:shadow-xl hover:shadow-electric-blue/10 overflow-hidden"
-                  >
-                    <div className="relative h-48">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-navy/80 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4">
-                        <Badge variant="outline" className="text-electric-blue border-electric-blue/30 bg-dark-navy/80 backdrop-blur-sm">
-                          {post.category}
+                  
+                  <CardHeader>
+                    <CardTitle className="text-star-white group-hover:text-electric-blue transition-colors">
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription className="text-star-white/70">
+                      {item.description}
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {item.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="border-electric-blue/30 text-electric-blue text-xs">
+                          {tag}
                         </Badge>
-                      </div>
+                      ))}
                     </div>
                     
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 text-star-white/60 text-sm mb-4">
-                        <div className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {new Date(post.publishDate).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric' 
-                          })}
-                        </div>
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {post.readTime}
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-xl font-bold text-star-white mb-4 group-hover:text-electric-blue transition-colors leading-tight">
-                        {post.title}
-                      </h3>
-                      
-                      <p className="text-star-white/70 mb-6 leading-relaxed">
-                        {post.excerpt}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-1 mb-6">
-                        {post.tags.slice(0, 2).map((tag, tagIndex) => (
-                          <Badge key={tagIndex} variant="outline" className="text-xs border-star-white/20 text-star-white/60">
-                            {tag}
-                          </Badge>
-                        ))}
-                        {post.tags.length > 2 && (
-                          <Badge variant="outline" className="text-xs border-star-white/20 text-star-white/60">
-                            +{post.tags.length - 2}
-                          </Badge>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                            <span className="text-electric-blue font-bold text-xs">
-                              {post.author.name.split(' ').map(n => n[0]).join('')}
-                            </span>
-                          </div>
-                          <span className="text-star-white/70 text-sm">
-                            {post.author.name}
-                          </span>
-                        </div>
-                        
-                        <CTAButton
-                          intent="outline"
-                          icon="arrow"
-                          href={`/blog/${post.id}`}
-                          className="text-sm"
-                        >
-                          Read More
-                        </CTAButton>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                    <div className="flex items-center justify-between text-sm text-star-white/60 mb-4">
+                      <span>By {item.author}</span>
+                      <span>{item.publishDate}</span>
+                    </div>
+                    
+                    <Button className="w-full bg-gradient-to-r from-electric-blue to-purple-400 text-dark-navy font-bold group-hover:scale-105 transition-transform">
+                      {item.type === "tool" ? "Use Tool" : item.type === "podcast" ? "Listen Now" : "Download Free"}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
+      )}
 
-        {/* Newsletter CTA */}
-        <section className="py-20 bg-gradient-to-r from-electric-blue/10 via-purple-400/5 to-electric-blue/10">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-4xl font-bold text-star-white mb-6">
-                Get Weekly Growth Insights
-              </h2>
-              <p className="text-xl text-star-white/80 mb-8">
-                Join 5,000+ SaaS founders and growth leaders getting proven strategies, frameworks, 
-                and exclusive case studies delivered every Tuesday.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto mb-6">
-                <Input 
-                  placeholder="Enter your work email" 
-                  className="bg-dark-navy/60 border-star-white/30 text-star-white placeholder:text-star-white/50 focus:border-electric-blue"
-                />
-                <CTAButton
-                  intent="primary"
-                  icon="arrow"
-                  className="whitespace-nowrap"
-                >
-                  Subscribe Free
-                </CTAButton>
-              </div>
-              
-              <p className="text-sm text-star-white/60">
-                ✓ No spam ✓ Unsubscribe anytime ✓ Read by founders at Stripe, Slack, Zoom & 500+ more
-              </p>
-            </div>
+      {/* All Resources Grid */}
+      <section className="py-16">
+        <div className="container mx-auto container-padding">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredContent.map((item) => (
+              <Card key={item.id} className="group hover:scale-105 transition-all duration-300 bg-dark-navy/50 border-electric-blue/20">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className="bg-electric-blue/20 text-electric-blue border-electric-blue/30">
+                      {item.type === "guide" && <BookOpen className="mr-1 h-3 w-3" />}
+                      {item.type === "tool" && <Calculator className="mr-1 h-3 w-3" />}
+                      {item.type === "podcast" && <Mic className="mr-1 h-3 w-3" />}
+                      {item.type === "webinar" && <Video className="mr-1 h-3 w-3" />}
+                      {item.type === "case-study" && <TrendingUp className="mr-1 h-3 w-3" />}
+                      {item.type.charAt(0).toUpperCase() + item.type.slice(1).replace("-", " ")}
+                    </Badge>
+                    
+                    {item.rating && (
+                      <div className="flex items-center gap-1">
+                        <Star className="h-3 w-3 text-yellow-400 fill-current" />
+                        <span className="text-star-white text-xs">{item.rating}</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <CardTitle className="text-star-white group-hover:text-electric-blue transition-colors">
+                    {item.title}
+                  </CardTitle>
+                  <CardDescription className="text-star-white/70">
+                    {item.description}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {item.tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="border-electric-blue/30 text-electric-blue text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="space-y-2 text-sm text-star-white/60 mb-4">
+                    <div className="flex items-center justify-between">
+                      <span>By {item.author}</span>
+                      <span>{item.publishDate}</span>
+                    </div>
+                    
+                    {item.downloadCount && (
+                      <div className="flex items-center gap-2">
+                        <Download className="h-3 w-3" />
+                        <span>{item.downloadCount} downloads</span>
+                      </div>
+                    )}
+                    
+                    {item.duration && (
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-3 w-3" />
+                        <span>{item.duration}</span>
+                      </div>
+                    )}
+                    
+                    {item.result && (
+                      <div className="flex items-center gap-2 text-electric-blue font-medium">
+                        <TrendingUp className="h-3 w-3" />
+                        <span>{item.result}</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <Button className="w-full bg-gradient-to-r from-electric-blue to-purple-400 text-dark-navy font-bold group-hover:scale-105 transition-transform">
+                    {item.type === "tool" ? "Use Tool" : 
+                     item.type === "podcast" ? "Listen Now" : 
+                     item.type === "webinar" ? "Register Free" :
+                     "Download Free"}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <Footer />
+      {/* Bottom CTA */}
+      <section className="py-16 border-t border-star-white/10">
+        <div className="container mx-auto container-padding text-center">
+          <h2 className="text-3xl font-bold text-star-white mb-4">
+            Ready to Scale Your SaaS to $100M+?
+          </h2>
+          <p className="text-xl text-star-white/80 mb-8 max-w-2xl mx-auto">
+            Get personalized growth recommendations from our team of experts who've helped 500+ SaaS companies scale.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button size="lg" className="bg-gradient-to-r from-electric-blue to-purple-400 text-dark-navy font-bold px-8 hover:scale-105 transition-transform">
+              <Rocket className="mr-2 h-5 w-5" />
+              Get Free Growth Plan
+            </Button>
+            <Button size="lg" variant="outline" className="border-electric-blue/50 text-electric-blue hover:bg-electric-blue/10">
+              <Calendar className="mr-2 h-5 w-5" />
+              Book Strategy Call
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   )
 } 

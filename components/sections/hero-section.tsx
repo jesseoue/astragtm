@@ -18,7 +18,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center section-bg-primary overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center section-bg-primary overflow-hidden pt-0">
       {/* Animated background stars */}
       <div className="absolute inset-0 overflow-hidden">
         {stars.map((star) => (
