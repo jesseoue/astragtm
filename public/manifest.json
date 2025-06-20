@@ -1,0 +1,27 @@
+{
+  "name": "Astra GTM - Scale Your SaaS Revenue",
+  "short_name": "Astra GTM",
+  "description": "Transform your SaaS into a revenue machine with AI-powered GTM systems. 340% average ROI increase in 60 days.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F1A",
+  "theme_color": "#00D4FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "marketing"],
+  "lang": "en-US",
+  "dir": "ltr"
+} 

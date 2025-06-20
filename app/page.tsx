@@ -11,6 +11,8 @@ import { FaqAccordion } from "@/components/sections/faq-accordion"
 import { CtaSection } from "@/components/sections/cta-section"
 import { ROICalculator } from "@/components/ui/roi-calculator"
 import { ExitIntentPopup } from "@/components/ui/exit-intent-popup"
+import { NotificationOptin } from "@/components/ui/notification-optin"
+import { LiveChat } from "@/components/ui/live-chat"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 
@@ -111,8 +113,10 @@ export default function HomePage() {
         <Footer />
       </div>
       
-      {/* Exit Intent Popup */}
+      {/* Conversion Components */}
       <ExitIntentPopup onEmailCapture={handleExitIntentCapture} />
+      <NotificationOptin />
+      <LiveChat />
     </>
   )
 }
