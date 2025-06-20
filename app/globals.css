@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: "Inter", sans-serif;
+    --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
+
+    --background: 222 47% 11%; /* #0C1120 dark-navy */
+    --foreground: 210 17% 98%; /* #F8F9FA star-white */
+
+    --card: 222 47% 13%; /* Slightly lighter than background for card base */
+    --card-foreground: 210 17% 98%; /* #F8F9FA */
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 17% 98%;
+
+    --primary: 200 93% 60%; /* #38BDF8 electric-blue */
+    --primary-foreground: 222 47% 11%; /* dark-navy for good contrast on electric blue */
+
+    --secondary: 215 28% 17%; /* A slightly lighter navy for secondary elements */
+    --secondary-foreground: 210 17% 98%;
+
+    --muted: 215 20% 25%; /* Muted navy */
+    --muted-foreground: 210 10% 70%; /* Muted white/gray */
+
+    --accent: 200 93% 60%; /* #38BDF8 electric-blue */
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 17% 98%;
+
+    --border: 215 20% 22%; /* Border for cards, slightly lighter than bg */
+    --input: 215 20% 25%;
+    --ring: 200 93% 60%; /* electric-blue for focus rings */
+
+    --radius: 0.75rem; /* rounded-lg */
+  }
+
+  /* No specific .dark class needed if dark is the default theme */
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.glassmorphism-card {
+  @apply bg-star-white/5 backdrop-filter backdrop-blur-lg border border-star-white/10;
+}
