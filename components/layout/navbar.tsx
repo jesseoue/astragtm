@@ -4,29 +4,20 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { AstraLogo } from "@/components/icons/astra-logo"
-import { Menu, X, Sparkles, Calculator, ArrowRight, ChevronDown } from "lucide-react"
+import { Menu, X, Sparkles, Calculator, ArrowRight } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
   { href: "/pricing", label: "Pricing" },
   { href: "/case-studies", label: "Case Studies" },
-  { 
-    href: "/about", 
-    label: "About",
-    submenu: [
-      { href: "/about", label: "Our Story" },
-      { href: "/about#team", label: "Team" },
-      { href: "/about#careers", label: "Careers" },
-    ]
-  },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Resources" },
 ]
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -50,57 +41,30 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center group" aria-label="Astra GTM Home">
-            <AstraLogo className="h-9 w-auto text-star-white group-hover:text-electric-blue transition-colors duration-300" />
-            <span className="ml-3 text-xl font-bold text-star-white hidden sm:block">
-              Astra<span className="text-gradient bg-gradient-to-r from-electric-blue to-purple-400 bg-clip-text text-transparent">GTM</span>
-            </span>
+          {/* Clean Logo - No Duplication */}
+          <Link href="/" className="group" aria-label="Astra GTM Home">
+            <AstraLogo />
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Simplified Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <div
+              <Link
                 key={link.href}
-                className="relative"
-                onMouseEnter={() => link.submenu && setActiveSubmenu(link.label)}
-                onMouseLeave={() => setActiveSubmenu(null)}
-              >
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "relative text-sm font-medium transition-all duration-300 hover:text-electric-blue group flex items-center",
-                    pathname === link.href
-                      ? "text-electric-blue"
-                      : "text-star-white/80"
-                  )}
-                >
-                  {link.label}
-                  {link.submenu && (
-                    <ChevronDown size={14} className="ml-1 transition-transform duration-200 group-hover:rotate-180" />
-                  )}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-electric-blue transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-
-                {/* Submenu */}
-                {link.submenu && activeSubmenu === link.label && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-dark-navy/95 backdrop-blur-xl border border-electric-blue/20 rounded-lg shadow-2xl py-2">
-                    {link.submenu.map((sublink) => (
-                      <Link
-                        key={sublink.href}
-                        href={sublink.href}
-                        className="block px-4 py-3 text-sm text-star-white/80 hover:text-electric-blue hover:bg-electric-blue/10 transition-all duration-200"
-                      >
-                        {sublink.label}
-                      </Link>
-                    ))}
-                  </div>
+                href={link.href}
+                className={cn(
+                  "relative text-sm font-medium transition-all duration-300 hover:text-electric-blue group",
+                  pathname === link.href
+                    ? "text-electric-blue"
+                    : "text-star-white/80"
                 )}
-              </div>
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-electric-blue transition-all duration-300 group-hover:w-full"></span>
+              </Link>
             ))}
             
-            {/* ROI Calculator Link */}
+            {/* ROI Calculator Quick Access */}
             <Link
               href="#roi-calculator"
               className="flex items-center text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors duration-300 px-3 py-2 rounded-lg hover:bg-purple-400/10"
@@ -110,7 +74,7 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Desktop CTAs - Inspired by Galactic Fed */}
+          {/* Conversion-Focused CTAs */}
           <div className="hidden lg:flex items-center space-x-3">
             <Button
               asChild
@@ -152,43 +116,26 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Enhanced Mobile Menu */}
+      {/* Clean Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-dark-navy/98 backdrop-blur-xl shadow-2xl border-b border-electric-blue/20">
           <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
             {/* Mobile Navigation Links */}
-            <div className="flex flex-col space-y-4 mb-8">
+            <div className="flex flex-col space-y-3 mb-6">
               {navLinks.map((link) => (
-                <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "flex items-center py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 hover:bg-electric-blue/10 hover:text-electric-blue",
-                      pathname === link.href
-                        ? "text-electric-blue bg-electric-blue/10"
-                        : "text-star-white"
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                  
-                  {/* Mobile Submenu */}
-                  {link.submenu && (
-                    <div className="ml-4 mt-2 space-y-2">
-                      {link.submenu.map((sublink) => (
-                        <Link
-                          key={sublink.href}
-                          href={sublink.href}
-                          onClick={() => setIsOpen(false)}
-                          className="block py-2 px-4 text-sm text-star-white/70 hover:text-electric-blue hover:bg-electric-blue/5 rounded-lg transition-all duration-300"
-                        >
-                          {sublink.label}
-                        </Link>
-                      ))}
-                    </div>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "flex items-center py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 hover:bg-electric-blue/10 hover:text-electric-blue",
+                    pathname === link.href
+                      ? "text-electric-blue bg-electric-blue/10"
+                      : "text-star-white"
                   )}
-                </div>
+                >
+                  {link.label}
+                </Link>
               ))}
               
               {/* ROI Calculator for Mobile */}
@@ -203,7 +150,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile CTAs */}
-            <div className="space-y-4 pt-6 border-t border-star-white/10">
+            <div className="space-y-3 pt-4 border-t border-star-white/10">
               <Button
                 asChild
                 variant="outline"
@@ -211,7 +158,7 @@ export function Navbar() {
                 size="lg"
               >
                 <Link href="/pricing" onClick={() => setIsOpen(false)}>
-                  View Pricing Plans
+                  View Pricing
                 </Link>
               </Button>
               
@@ -226,16 +173,6 @@ export function Navbar() {
                   <ArrowRight size={16} className="ml-2" />
                 </Link>
               </Button>
-              
-              {/* Contact info for mobile */}
-              <div className="mt-6 pt-4 border-t border-star-white/10 text-center">
-                <p className="text-star-white/60 text-sm">
-                  Ready to scale your revenue? 
-                  <Link href="mailto:hello@astragtm.com" className="text-electric-blue hover:text-electric-blue/80 ml-1 font-medium">
-                    Let&apos;s talk
-                  </Link>
-                </p>
-              </div>
             </div>
           </nav>
         </div>
