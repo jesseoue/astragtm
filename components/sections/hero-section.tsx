@@ -1,26 +1,55 @@
 "use client"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { CTAButton } from "@/components/ui/cta-button"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { AnimatedSection } from "@/components/animated-section"
+import { motion } from "framer-motion"
 import Link from "next/link"
 
+interface Star {
+  id: number
+  left: number
+  top: number
+  width: number
+  height: number
+  animationDelay: number
+  animationDuration: number
+}
+
 export function HeroSection() {
+  const [stars, setStars] = useState<Star[]>([])
+
+  useEffect(() => {
+    // Generate stars on client side only to avoid hydration mismatch
+    const generatedStars = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      width: Math.random() * 2 + 1,
+      height: Math.random() * 2 + 1,
+      animationDelay: Math.random() * 3,
+      animationDuration: Math.random() * 2 + 3,
+    }))
+    setStars(generatedStars)
+  }, [])
+
   return (
-    <section className="relative min-h-[80vh] md:min-h-screen flex items-center py-20 md:py-32 overflow-hidden">
+    <section className="relative min-h-[80vh] md:min-h-screen flex items-center py-20 md:py-32 overflow-hidden bg-gradient-to-br from-dark-navy via-dark-navy to-deep-purple">
       {/* Animated stars background */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {stars.map((star) => (
           <div
-            key={i}
+            key={star.id}
             className="absolute bg-star-white rounded-full animate-star-glow"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${Math.random() * 2 + 3}s`,
+              left: `${star.left}%`,
+              top: `${star.top}%`,
+              width: `${star.width}px`,
+              height: `${star.height}px`,
+              animationDelay: `${star.animationDelay}s`,
+              animationDuration: `${star.animationDuration}s`,
             }}
           />
         ))}
@@ -30,33 +59,54 @@ export function HeroSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <AnimatedSection className="space-y-8 text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-star-white leading-tight">
-              Shape Your <span className="text-electric-blue">Growth</span> Operations
+              Scale Your <span className="text-electric-blue bg-gradient-to-r from-electric-blue to-purple-400 bg-clip-text text-transparent">Revenue Engine</span>
             </h1>
             <p className="text-lg sm:text-xl text-star-white/80 max-w-xl mx-auto md:mx-0">
-              AI-powered GTM systems for early-stage B2B startups. We build intelligent workflows that drive revenue and
-              scale your business.
+              AI-powered GTM systems for B2B SaaS companies. We build intelligent workflows that drive predictable revenue growth and scale your operations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button
-                asChild
-                size="lg"
-                className="bg-electric-blue text-dark-navy hover:bg-electric-blue/90 font-semibold text-base"
+              <CTAButton
+                intent="primary"
+                icon="phone"
+                href="/contact"
+                glow
+                className="shadow-2xl shadow-electric-blue/25 text-lg px-8 py-4"
               >
-                <Link href="#services">
-                  Get Started <ArrowRight size={20} className="ml-2" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="bg-transparent text-star-white border-electric-blue hover:bg-electric-blue/10 hover:text-electric-blue font-semibold text-base"
+                Get Free Revenue Audit
+              </CTAButton>
+              <CTAButton
+                intent="outline"
+                icon="calculator"
+                href="#roi-calculator"
+                className="text-lg px-8 py-4"
               >
-                <Link href="#packages">
-                  See Packages <Sparkles size={20} className="ml-2" />
-                </Link>
-              </Button>
+                Calculate ROI
+              </CTAButton>
             </div>
+            
+            {/* Trust indicators */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex flex-col sm:flex-row items-center gap-6 text-center md:text-left"
+            >
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4,5].map((i) => (
+                    <div key={i} className="w-8 h-8 bg-gradient-to-r from-electric-blue to-purple-400 rounded-full border-2 border-dark-navy flex items-center justify-center">
+                      <span className="text-xs text-dark-navy font-bold">✓</span>
+                    </div>
+                  ))}
+                </div>
+                <span className="text-star-white/80 text-sm font-medium">
+                  500+ SaaS companies scaled
+                </span>
+              </div>
+              <div className="text-electric-blue font-medium text-sm">
+                • Average 340% ROI • 60-day results guarantee
+              </div>
+            </motion.div>
           </AnimatedSection>
 
           <AnimatedSection delay={0.2} className="hidden md:flex justify-center items-center">
@@ -69,10 +119,11 @@ export function HeroSection() {
                 className="object-contain"
                 priority
               />
-              {/* Placeholder for more complex animation if needed */}
+              {/* Enhanced animation rings */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-3/4 h-3/4 border-2 border-electric-blue/30 rounded-full animate-pulse"></div>
-                <div className="absolute w-full h-full border border-star-white/10 rounded-full animate-pulse animation-delay-500"></div>
+                <div className="w-3/4 h-3/4 border-2 border-electric-blue/40 rounded-full animate-pulse"></div>
+                <div className="absolute w-full h-full border border-purple-400/20 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute w-1/2 h-1/2 border border-star-white/20 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
               </div>
             </div>
           </AnimatedSection>

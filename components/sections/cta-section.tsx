@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { CTAButton } from "@/components/ui/cta-button"
 import { AnimatedSection } from "@/components/animated-section"
 import { Phone, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -13,28 +14,23 @@ export function CtaSection() {
           consultation today.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            asChild
-            size="lg"
-            variant="default"
-            className="bg-dark-navy text-star-white hover:bg-dark-navy/90 font-semibold text-base shadow-lg"
+          <CTAButton
+            intent="secondary"
+            icon="phone"
+            href="/contact"
+            className="bg-dark-navy text-star-white hover:bg-dark-navy/90 shadow-lg"
+            glow
           >
-            <Link href="https://calendly.com/your-astra-gtm-link" target="_blank" rel="noopener noreferrer">
-              <Phone size={20} className="mr-2" />
-              Book a Free Call
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="bg-transparent text-dark-navy border-dark-navy hover:bg-dark-navy/10 hover:text-dark-navy font-semibold text-base shadow-lg"
+            Book a Free Call
+          </CTAButton>
+          <CTAButton
+            intent="outline"
+            icon="sparkles"
+            href="/pricing"
+            className="bg-transparent text-dark-navy border-dark-navy hover:bg-dark-navy/10 hover:text-dark-navy shadow-lg"
           >
-            <Link href="#packages">
-              <Sparkles size={20} className="mr-2" />
-              Explore Packages
-            </Link>
-          </Button>
+            View Pricing
+          </CTAButton>
         </div>
       </AnimatedSection>
     </section>

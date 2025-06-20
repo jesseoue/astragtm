@@ -20,9 +20,10 @@ const config = {
     },
     extend: {
       colors: {
-        "dark-navy": "#0C1120",
-        "star-white": "#F8F9FA",
-        "electric-blue": "#38BDF8",
+        "dark-navy": "#0B1426",
+        "deep-purple": "#1E0B2E",
+        "star-white": "#F8FAFC",
+        "electric-blue": "#00D4FF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -56,6 +57,13 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
       },
       fontFamily: {
         heading: ["var(--font-inter)", "sans-serif"],
@@ -76,14 +84,23 @@ const config = {
           to: { height: "0" },
         },
         "star-glow": {
-          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
-          "50%": { opacity: "1", transform: "scale(1.2)" },
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "star-glow": "star-glow 3s infinite ease-in-out",
+        "star-glow": "star-glow 3s ease-in-out infinite",
+        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "bounce-slow": "bounce 2s infinite",
+      },
+      backdropBlur: {
+        xs: "2px",
+      },
+      boxShadow: {
+        "electric": "0 0 20px rgba(56, 189, 248, 0.3)",
+        "electric-lg": "0 0 40px rgba(56, 189, 248, 0.4)",
       },
     },
   },

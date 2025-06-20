@@ -1,12 +1,36 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
+  "name": "astra-gtm",
+  "version": "1.0.0",
+  "description": "A modern, conversion-optimized website for B2B SaaS companies with interactive tools and lead capture",
   "private": true,
+  "keywords": [
+    "saas",
+    "gtm",
+    "conversion-optimization",
+    "lead-generation",
+    "nextjs",
+    "typescript",
+    "tailwindcss"
+  ],
+  "author": "Astra GTM Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/astragtm.git"
+  },
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
-    "start": "next start"
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "build:analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next out",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "precommit": "npm run type-check && npm run lint && npm run format:check",
+    "test": "echo \"Tests not yet configured\" && exit 0"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -62,11 +86,25 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.2.4",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "15.2.4",
     "postcss": "^8.5",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }

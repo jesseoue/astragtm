@@ -4,14 +4,16 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { AstraLogo } from "@/components/icons/astra-logo"
-import { Menu, XIcon, Briefcase, Zap, BookOpen, Phone } from "lucide-react" // Added more icons
+import { Menu, XIcon, Briefcase, Zap, BookOpen, Phone, Users, Award, DollarSign } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "#services", label: "Services", icon: <Briefcase size={16} /> },
-  { href: "#tech-stack", label: "Tech Stack", icon: <Zap size={16} /> },
-  { href: "#resources", label: "Resources", icon: <BookOpen size={16} /> }, // Assuming FAQ is a resource
+  { href: "/pricing", label: "Pricing", icon: <DollarSign size={16} /> },
+  { href: "/case-studies", label: "Case Studies", icon: <Award size={16} /> },
+  { href: "/about", label: "About", icon: <Users size={16} /> },
+  { href: "/blog", label: "Blog", icon: <BookOpen size={16} /> },
+  { href: "#how-it-works", label: "How It Works", icon: <Zap size={16} /> },
 ]
 
 export function Navbar() {
@@ -57,10 +59,10 @@ export function Navbar() {
           </nav>
 
           <div className="hidden md:block">
-            <Button asChild variant="default" className="bg-electric-blue text-dark-navy hover:bg-electric-blue/90">
-              <Link href="#book-call">
+            <Button asChild variant="default" className="bg-electric-blue text-dark-navy hover:bg-electric-blue/90 shadow-lg hover:shadow-electric-blue/25 transition-all duration-300">
+              <Link href="/contact">
                 <Phone size={16} className="mr-2" />
-                Book Call
+                Get Free Audit
               </Link>
             </Button>
           </div>
@@ -97,11 +99,11 @@ export function Navbar() {
             <Button
               asChild
               variant="default"
-              className="w-full bg-electric-blue text-dark-navy hover:bg-electric-blue/90"
+              className="w-full bg-electric-blue text-dark-navy hover:bg-electric-blue/90 shadow-lg"
             >
-              <Link href="#book-call" onClick={() => setIsOpen(false)}>
+              <Link href="/contact" onClick={() => setIsOpen(false)}>
                 <Phone size={16} className="mr-2" />
-                Book Call
+                Get Free Audit
               </Link>
             </Button>
           </nav>
