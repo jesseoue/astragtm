@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
 // import { Metadata } from "next"
 
 /* Note: Metadata would normally be defined here for server components,
@@ -14,9 +12,7 @@ export default function CookiesPage() {
   }, [])
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-dark-navy">
+    <main className="min-h-screen">
         <div className="container mx-auto px-4 py-20 max-w-4xl">
           <div className="bg-gradient-to-br from-dark-navy/80 to-deep-purple/20 border border-electric-blue/20 rounded-xl p-8 md:p-12">
             <div className="text-center mb-12">
@@ -509,7 +505,5 @@ export default function CookiesPage() {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
   )
 } 

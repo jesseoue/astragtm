@@ -1,0 +1,18 @@
+Contact: mailto:security@astragtm.com
+Contact: https://astragtm.com/contact
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://astragtm.com/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://astragtm.com/.well-known/security.txt
+Policy: https://astragtm.com/security-policy
+Hiring: https://astragtm.com/careers
+
+# Security Policy
+# 
+# We take security seriously and appreciate responsible disclosure.
+# Please report security vulnerabilities to security@astragtm.com
+# 
+# Bug Bounty: We offer rewards for valid security findings
+# Response Time: We aim to respond within 24 hours
+# 
+# Thank you for helping keep Astra GTM secure! 

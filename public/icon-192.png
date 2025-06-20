@@ -1,0 +1,27 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9F7AEA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="url(#iconGradient)" opacity="0.1"/>
+  
+  <!-- Main logo design - stylized "A" for Astra -->
+  <path d="M30 70 L50 25 L70 70 L62 70 L57 58 L43 58 L38 70 Z" fill="url(#iconGradient)" stroke="none"/>
+  <rect x="46" y="52" width="8" height="4" fill="#0B0F1A"/>
+  
+  <!-- Accent elements for GTM/growth -->
+  <circle cx="75" cy="35" r="3" fill="#00D4FF" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="25" cy="45" r="2" fill="#9F7AEA" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="85" cy="65" r="2.5" fill="#EC4899" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+</svg> 

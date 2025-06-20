@@ -1,8 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
 import { LeadCaptureForm } from "@/components/ui/lead-capture-form"
 import { CTAButton } from "@/components/ui/cta-button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -39,10 +37,7 @@ const contactMethods = [
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-dark-navy">
-      <Navbar />
-      
-      <main className="flex-grow">
+    <>
         <section className="py-20 md:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
@@ -130,9 +125,6 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </>
   )
 } 

@@ -1,8 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
 import { CTAButton } from "@/components/ui/cta-button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Home, Search, Phone, ArrowLeft } from "lucide-react"
@@ -18,10 +16,7 @@ const popularPages = [
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col min-h-screen bg-dark-navy">
-      <Navbar />
-      
-      <main className="flex-grow flex items-center">
+    <div className="flex items-center min-h-[70vh]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedSection>
@@ -144,9 +139,6 @@ export default function NotFound() {
             </AnimatedSection>
           </div>
         </div>
-      </main>
-
-      <Footer />
     </div>
   )
 } 

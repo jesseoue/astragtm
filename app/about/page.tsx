@@ -1,8 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
 import { CTAButton } from "@/components/ui/cta-button"
 import { MetricStat } from "@/components/ui/metric-stat"
 import { Card, CardContent } from "@/components/ui/card"
@@ -65,10 +63,7 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-dark-navy">
-      <Navbar />
-      
-      <main className="flex-grow">
+    <>
         {/* Hero Section */}
         <section className="py-20 md:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -303,9 +298,6 @@ export default function AboutPage() {
             </AnimatedSection>
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </>
   )
 } 

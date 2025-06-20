@@ -4,6 +4,11 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import Script from 'next/script'
 import './globals.css'
+import { Navbar } from "@/components/layout/navbar"
+import { Footer } from "@/components/layout/footer"
+import { ExitIntentPopup } from "@/components/ui/exit-intent-popup"
+import { NotificationOptin } from "@/components/ui/notification-optin"
+import { LiveChat } from "@/components/ui/live-chat"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -32,32 +37,31 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://astragtm.com'),
+  metadataBase: new URL('https://astragtm.com'),
   title: {
-    default: 'Astra GTM - Scale Your SaaS Revenue with AI-Powered GTM Systems | 340% Average ROI',
-    template: '%s | Astra GTM - SaaS Revenue Growth Platform'
+    default: "Astra GTM - AI-Powered SaaS Growth & Revenue Optimization",
+    template: "%s | Astra GTM - SaaS Growth Experts"
   },
-  description: 'Transform your B2B SaaS into a revenue machine with AI-powered go-to-market systems. Join 500+ companies that generated $2.4B+ revenue with 340% average ROI. Get your free revenue audit today.',
+  description: "Transform your SaaS revenue with AI-powered go-to-market systems. We help B2B companies scale predictably with proven frameworks. 340% average ROI in 60 days.",
   keywords: [
-    'SaaS GTM optimization',
-    'B2B revenue growth',
-    'AI-powered sales systems',
-    'conversion rate optimization',
-    'sales funnel optimization',
-    'GTM strategy consulting',
-    'SaaS growth hacking',
-    'revenue operations',
-    'lead generation automation',
-    'B2B marketing automation',
-    'SaaS revenue optimization',
-    'go-to-market strategy',
-    'B2B conversion optimization',
-    'revenue growth consulting',
-    'SaaS scaling strategies'
+    "SaaS growth",
+    "go-to-market",
+    "GTM optimization",
+    "B2B SaaS marketing",
+    "revenue optimization",
+    "AI-powered marketing",
+    "SaaS automation",
+    "lead generation",
+    "sales funnel optimization",
+    "SaaS revenue growth",
+    "marketing automation",
+    "CRM integration",
+    "sales pipeline",
+    "conversion optimization"
   ],
-  authors: [{ name: 'Astra GTM Team', url: 'https://astragtm.com/about' }],
-  creator: 'Astra GTM',
-  publisher: 'Astra GTM',
+  authors: [{ name: "Astra GTM Team" }],
+  creator: "Astra GTM",
+  publisher: "Astra GTM",
   applicationName: 'Astra GTM Platform',
   generator: 'Next.js',
   referrer: 'origin-when-cross-origin',
@@ -77,24 +81,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: '/',
+    url: 'https://astragtm.com',
     siteName: 'Astra GTM',
-    title: 'Scale Your SaaS Revenue with AI-Powered GTM Systems | 340% ROI',
-    description: 'Transform your B2B SaaS into a revenue machine. Join 500+ companies that generated $2.4B+ with our AI-powered GTM systems. Free revenue audit available.',
+    title: 'Astra GTM - AI-Powered SaaS Growth & Revenue Optimization',
+    description: 'Transform your SaaS revenue with AI-powered go-to-market systems. We help B2B companies scale predictably with proven frameworks. 340% average ROI in 60 days.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Astra GTM - AI-Powered SaaS Revenue Growth Platform',
-        type: 'image/png',
+        alt: 'Astra GTM - SaaS Growth Experts',
+        type: 'image/jpeg',
       },
       {
-        url: '/og-image-square.png',
-        width: 800,
-        height: 800,
+        url: '/og-image-square.jpg',
+        width: 1200,
+        height: 1200,
         alt: 'Astra GTM Logo',
-        type: 'image/png',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -102,171 +106,61 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@astragtm',
     creator: '@astragtm',
-    title: 'Scale Your SaaS Revenue with AI-Powered GTM Systems',
-    description: 'Transform your B2B SaaS into a revenue machine. 500+ companies, $2.4B+ generated, 340% average ROI.',
-    images: {
-      url: '/twitter-image.png',
-      alt: 'Astra GTM - SaaS Revenue Growth Platform',
-    },
+    title: 'Astra GTM - AI-Powered SaaS Growth & Revenue Optimization',
+    description: 'Transform your SaaS revenue with AI-powered go-to-market systems. 340% average ROI in 60 days.',
+    images: ['/og-image.jpg'],
   },
   alternates: {
-    canonical: '/',
+    canonical: 'https://astragtm.com',
     types: {
       'application/rss+xml': '/rss.xml',
     },
   },
-  category: 'Business Software',
-  classification: 'SaaS Revenue Growth Platform',
+  category: 'technology',
+  classification: 'Business',
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
-    yandex: process.env.YANDEX_VERIFICATION,
-    other: {
-      'msvalidate.01': process.env.BING_SITE_VERIFICATION || '',
-    },
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    yahoo: 'your-yahoo-verification-code',
   },
 }
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://astragtm.com/#organization",
-      "name": "Astra GTM",
-      "alternateName": "AstraGTM",
-      "description": "AI-powered go-to-market systems for B2B SaaS companies that scale revenue predictably",
-      "url": "https://astragtm.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://astragtm.com/logo.png",
-        "width": 300,
-        "height": 100
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://astragtm.com/og-image.png",
-        "width": 1200,
-        "height": 630
-      },
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "telephone": "+1-555-0123",
-          "contactType": "customer service",
-          "availableLanguage": "English",
-          "areaServed": "Worldwide"
-        },
-        {
-          "@type": "ContactPoint",
-          "contactType": "sales",
-          "availableLanguage": "English",
-          "areaServed": "Worldwide"
-        }
-      ],
-      "sameAs": [
-        "https://linkedin.com/company/astragtm",
-        "https://twitter.com/astragtm",
-        "https://github.com/astragtm"
-      ],
-      "foundingDate": "2023",
-      "numberOfEmployees": {
-        "@type": "QuantitativeValue",
-        "minValue": 10,
-        "maxValue": 50
-      },
-      "industry": "Software",
-      "serviceArea": {
-        "@type": "Place",
-        "name": "Global"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "127",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://astragtm.com/#website",
-      "url": "https://astragtm.com",
-      "name": "Astra GTM",
-      "description": "AI-powered SaaS revenue growth platform",
-      "publisher": {
-        "@id": "https://astragtm.com/#organization"
-      },
-      "potentialAction": [
-        {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://astragtm.com/search?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      ]
-    },
-    {
-      "@type": "Service",
-      "@id": "https://astragtm.com/#service",
-      "name": "AI-Powered GTM Optimization",
-      "description": "Comprehensive go-to-market optimization for B2B SaaS companies",
-      "provider": {
-        "@id": "https://astragtm.com/#organization"
-      },
-      "serviceType": "Revenue Growth Consulting",
-      "areaServed": "Worldwide",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "GTM Optimization Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Free Revenue Audit",
-              "description": "Comprehensive analysis of your current GTM strategy with actionable recommendations"
-            },
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          {
-            "@type": "Offer", 
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Conversion Rate Optimization",
-              "description": "Systematic improvement of your sales funnel performance"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service", 
-              "name": "AI-Powered Lead Generation",
-              "description": "Automated systems for qualified lead generation"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "@type": "Article",
-      "@id": "https://astragtm.com/#homepage",
-      "headline": "Scale Your SaaS Revenue with AI-Powered GTM Systems",
-      "description": "Transform your B2B SaaS into a revenue machine with proven GTM optimization strategies",
-      "author": {
-        "@id": "https://astragtm.com/#organization"
-      },
-      "publisher": {
-        "@id": "https://astragtm.com/#organization"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://astragtm.com/"
-      }
-    }
-  ]
+// Structured Data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Astra GTM',
+  description: 'AI-powered go-to-market systems for B2B SaaS companies. We help startups scale revenue predictably with data-driven automation and proven frameworks.',
+  url: 'https://astragtm.com',
+  logo: 'https://astragtm.com/icon.svg',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+1-555-ASTRA-GTM',
+    contactType: 'customer service',
+    email: 'hello@astragtm.com',
+    availableLanguage: 'English'
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'San Francisco',
+    addressRegion: 'CA',
+    addressCountry: 'US'
+  },
+  sameAs: [
+    'https://linkedin.com/company/astragtm',
+    'https://twitter.com/astragtm'
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '500'
+  },
+  offers: {
+    '@type': 'Offer',
+    description: 'SaaS Growth Consultation',
+    price: '0',
+    priceCurrency: 'USD'
+  }
 }
 
 export default function RootLayout({
@@ -280,7 +174,7 @@ export default function RootLayout({
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
         {/* Preload critical resources */}
@@ -346,8 +240,17 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
           <Toaster />
+          <ExitIntentPopup />
+          <NotificationOptin />
+          <LiveChat />
         </ThemeProvider>
       </body>
     </html>
