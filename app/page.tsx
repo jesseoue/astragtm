@@ -1,7 +1,6 @@
 "use client"
 
 import { HeroSection } from "@/components/sections/hero-section"
-import { ClientLogoBar } from "@/components/sections/client-logo-bar"
 import { HowItWorks } from "@/components/sections/how-it-works"
 import { WallOfLove } from "@/components/sections/wall-of-love"
 import { PackagesGrid } from "@/components/sections/packages-grid"
@@ -50,7 +49,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ClientLogoBar />
       
       {/* ROI Calculator Section - High-converting placement */}
       <section id="roi-calculator" className="section-padding section-bg-primary relative overflow-hidden">

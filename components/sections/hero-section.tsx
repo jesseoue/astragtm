@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { CTAButton } from "@/components/ui/cta-button"
+import { ClientLogoBar } from "./client-logo-bar"
 
 export function HeroSection() {
   const [stars, setStars] = useState<Array<{ id: number; left: string; top: string; delay: string }>>([])
@@ -121,6 +122,8 @@ export function HeroSection() {
               <div className="text-star-white/60 text-sm">Days to Results</div>
             </div>
           </div>
+
+          <ClientLogoBar />
         </div>
       </div>
     </section>

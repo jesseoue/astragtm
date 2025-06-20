@@ -24,6 +24,12 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Case Studies - Astra GTM Success Stories',
+  description: 'Explore real-world success stories from SaaS companies like Stripe, Slack, and HubSpot that have achieved massive growth with Astra GTM.',
+};
 
 const caseStudies = [
   {
