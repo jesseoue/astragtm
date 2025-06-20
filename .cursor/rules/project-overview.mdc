@@ -1,0 +1,26 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Astra GTM Project Overview
+
+This is a Next.js 14+ project using the App Router.
+
+## 📂 Key Directories
+
+*   **`app/`**: Contains all the routes and pages.
+    *   **`app/layout.tsx`**: The main layout file. **Crucially, this file contains the primary `<Navbar />` and `<Footer />` components.** To avoid duplication, individual pages should **not** include their own Navbar or Footer.
+    *   **`app/page.tsx`**: The homepage, which is composed of multiple section components.
+    *   **`app/api/`**: Contains all backend API routes, such as `[leads/route.ts](mdc:app/api/leads/route.ts)` for lead capture.
+    *   **`app/case-studies/`**: Holds the case study pages. See the `creating-case-studies.mdc` rule for more details.
+*   **`components/`**: The home for all React components, organized by function.
+    *   **`components/layout`**: Core layout components like `[navbar.tsx](mdc:components/layout/navbar.tsx)` and `[footer.tsx](mdc:components/layout/footer.tsx)`.
+    *   **`components/sections`**: Major page sections used to build the homepage (e.g., `[hero-section.tsx](mdc:components/sections/hero-section.tsx)`, `[wall-of-love.tsx](mdc:components/sections/wall-of-love.tsx)`).
+    *   **`components/ui`**: Reusable UI elements like buttons, cards, and the `[roi-calculator.tsx](mdc:components/ui/roi-calculator.tsx)`.
+    *   **`components/case-studies`**: Components specifically for building case study pages, like `[case-study-layout.tsx](mdc:components/case-studies/case-study-layout.tsx)`.
+*   **`public/`**: Stores static assets like images and logos.
+
+## 💡 Core Principle
+
+The site is built with a component-based, modular architecture. When adding or modifying content, prefer creating or editing a specific component rather than adding a lot of code directly to a page file in the `app/` directory. This keeps the codebase clean and maintainable.

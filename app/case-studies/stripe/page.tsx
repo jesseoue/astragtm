@@ -17,7 +17,7 @@ export default function StripeCaseStudyPage() {
       { value: '89%', label: 'Increase in Close Rate' },
       { value: '6 Months', label: 'To Achieve Full Results' },
     ],
-    imageUrl: '/og-image.jpg', // Placeholder
+    imageUrl: '/case-study-stripe.png', // Using a descriptive placeholder
   };
 
   return (

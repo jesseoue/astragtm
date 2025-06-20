@@ -1,0 +1,26 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Styling & Branding Guide
+
+This document outlines the primary styling conventions for the Astra GTM website.
+
+## Color Palette
+
+The core color scheme is designed for a modern, tech-focused dark mode aesthetic.
+
+*   **Primary Background**: `dark-navy` and `deep-purple`.
+*   **Accent/Highlight Color**: `electric-blue`. This is used for primary buttons, links, and important highlights.
+*   **Text**: `star-white` is the primary text color, with `star-white/80` or `star-white/70` used for subheadings and body copy to create a visual hierarchy.
+*   **Gradients**: Gradients often flow from `electric-blue` to `purple-400` or `pink-400` for headline text and other key elements.
+
+## Animations
+
+*   **Primary Animation Library**: The project uses `[framer-motion](https://www.framer.com/motion/)` for most complex animations, such as page transitions and staggered reveals.
+*   **Simple Animations**: For simpler interactions like button hover effects or transitions, prefer using Tailwind CSS utility classes (`transition-all`, `duration-300`, `hover:scale-105`, etc.) for better performance.
+
+## Typography
+
+The project uses a responsive typography scale defined in `[tailwind.config.ts](mdc:tailwind.config.ts)`. Please use the predefined text sizes (e.g., `text-lg`, `text-xl`, `text-4xl`) to maintain consistency.

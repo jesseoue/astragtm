@@ -1,0 +1,30 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# How to Create a Case Study
+
+Follow these steps to add a new case study to the website.
+
+1.  **Create a New Page File**:
+    *   Navigate to the `[app/case-studies/](mdc:app/case-studies)` directory.
+    *   Create a new sub-directory for the company (e.g., `slack`).
+    *   Inside that new directory, create a `page.tsx` file. For example: `[app/case-studies/slack/page.tsx](mdc:app/case-studies/stripe/page.tsx)`.
+
+2.  **Use the `CaseStudyLayout` Component**:
+    *   The primary component for structuring a case study is `[CaseStudyLayout](mdc:components/case-studies/case-study-layout.tsx)`.
+    *   Import it and use it as the main wrapper in your new `page.tsx` file.
+    *   Pass the required props: `companyName`, `companyLogoUrl`, `title`, `description`, `stats`, and `imageUrl`.
+
+3.  **Write the Content**:
+    *   The main narrative of the case study should be added as `children` to the `CaseStudyLayout` component.
+    *   Use standard JSX/HTML tags (`<h2>`, `<p>`, `<ul>`, `<blockquote>`, etc.) for the content. The layout component already includes styling for these elements via `prose`.
+
+4.  **Add to the Index Page**:
+    *   Open the main case studies index page: `[app/case-studies/page.tsx](mdc:app/case-studies/page.tsx)`.
+    *   Add a new entry to the `caseStudies` array at the top of the file. Make sure the `slug` matches the directory name you created in step 1.
+
+### Example
+
+For a blueprint, refer to the existing Stripe case study: `[app/case-studies/stripe/page.tsx](mdc:app/case-studies/stripe/page.tsx)`.

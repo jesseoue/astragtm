@@ -1,0 +1,26 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Component Guide
+
+This guide highlights the key components for common tasks.
+
+## Layout & Navigation
+
+*   **Navbar**: The main navigation bar is located at `[navbar.tsx](mdc:components/layout/navbar.tsx)`. It is sticky and has a scroll effect that applies a background. Do not add this component to individual pages; it's managed by `[layout.tsx](mdc:app/layout.tsx)`.
+*   **Footer**: The site footer is at `[footer.tsx](mdc:components/layout/footer.tsx)`. It's also managed by the main layout.
+
+## Homepage Sections
+
+The homepage (`[app/page.tsx](mdc:app/page.tsx)`) is built from these primary sections:
+
+*   **Hero Section**: `[hero-section.tsx](mdc:components/sections/hero-section.tsx)`. This is the first thing users see. It includes the main headline, CTAs, and the **Client Logo Bar**.
+*   **Wall of Love (Testimonials)**: `[wall-of-love.tsx](mdc:components/sections/wall-of-love.tsx)`. This section displays customer testimonials in a LinkedIn-style grid. It uses the `[testimonial-card.tsx](mdc:components/ui/testimonial-card.tsx)` component for individual posts.
+
+## Key Conversion & Engagement Tools
+
+*   **ROI Calculator**: The interactive calculator is at `[roi-calculator.tsx](mdc:components/ui/roi-calculator.tsx)`. This is a key lead-generation tool. It uses sliders for live input and captures an email to deliver a "full report".
+*   **Lead Capture Form**: A general lead capture form is at `[lead-capture-form.tsx](mdc:components/ui/lead-capture-form.tsx)`. This sends data to the `[leads API route](mdc:app/api/leads/route.ts)`.
+*   **Call-to-Action Buttons**: A custom, conversion-optimized button component is at `[cta-button.tsx](mdc:components/ui/cta-button.tsx)`. Use this for primary calls to action.
