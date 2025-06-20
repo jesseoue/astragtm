@@ -1,38 +1,48 @@
-import { Button } from "@/components/ui/button"
+"use client"
+
 import { CTAButton } from "@/components/ui/cta-button"
-import { AnimatedSection } from "@/components/animated-section"
-import { Phone, Sparkles } from "lucide-react"
-import Link from "next/link"
 
 export function CtaSection() {
   return (
-    <section id="book-call" className="py-20 md:py-32 bg-electric-blue text-dark-navy">
-      <AnimatedSection className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to Shape Your Growth Operations?</h2>
-        <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-dark-navy/80">
-          Let's discuss how Astra GTM can build AI-powered systems to accelerate your startup's success. Schedule a free
-          consultation today.
+    <section className="section-padding section-bg-accent relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-electric-blue/10 via-transparent to-transparent"></div>
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-electric-blue/20 to-purple-400/20 rounded-full blur-3xl"></div>
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
+      
+      <div className="container mx-auto container-padding text-center relative z-10">
+        <h2 className="font-bold text-star-white mb-6">
+          Ready to Scale Your Revenue? Let's Build Your Growth Engine
+        </h2>
+        <p className="text-large text-star-white/80 mb-12 max-w-3xl mx-auto">
+          Join 500+ SaaS companies that trust us to optimize their go-to-market strategy and accelerate growth.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <CTAButton
-            intent="secondary"
-            icon="phone"
-            href="/contact"
-            className="bg-dark-navy text-star-white hover:bg-dark-navy/90 shadow-lg"
+            intent="primary"
+            size="lg"
+            icon="sparkles"
             glow
+            href="/contact"
           >
-            Book a Free Call
+            Get Free Revenue Audit
           </CTAButton>
+          
           <CTAButton
             intent="outline"
-            icon="sparkles"
-            href="/pricing"
-            className="bg-transparent text-dark-navy border-dark-navy hover:bg-dark-navy/10 hover:text-dark-navy shadow-lg"
+            size="lg"
+            icon="phone"
+            href="/contact"
           >
-            View Pricing
+            Schedule a Call
           </CTAButton>
         </div>
-      </AnimatedSection>
+        
+        <div className="mt-8 text-star-white/60 text-sm">
+          ✅ Free strategy session • ✅ No long-term commitment • ✅ 60-day results guarantee
+        </div>
+      </div>
     </section>
   )
 }

@@ -207,21 +207,6 @@
       transition-duration: 0.01ms !important;
     }
   }
-
-  /* High contrast mode support */
-  @media (prefers-contrast: high) {
-    .text-star-white-80 {
-      @apply text-star-white;
-    }
-    
-    .text-star-white-70 {
-      @apply text-star-white;
-    }
-    
-    .border-star-white-20 {
-      @apply border-star-white/50;
-    }
-  }
 }
 
 @layer components {
