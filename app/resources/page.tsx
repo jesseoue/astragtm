@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { Mail, Search, Download, Star, Calendar, Users, BookOpen, Mic, Video, Award, Filter, FileText, Tool, Headphones, FileImage } from 'lucide-react'
+import { Mail, Search, Download, Star, Calendar, Users, BookOpen, Mic, Video, Award, Filter, FileText, Settings, Headphones, FileImage } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -672,7 +672,7 @@ export default function ResourcesPage() {
                           {/* For Tools */}
                           {item.details.formats && (
                             <div className="flex items-center text-star-white/60">
-                              <Tool className="h-3 w-3 mr-2 text-electric-blue" />
+                              <Settings className="h-3 w-3 mr-2 text-electric-blue" />
                               Available in: {item.details.formats.join(', ')}
                             </div>
                           )}
