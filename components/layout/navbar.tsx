@@ -157,11 +157,25 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu Backdrop */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Menu */}
       <div 
         className={cn(
-          "absolute top-full left-0 w-full lg:hidden bg-deep-purple/95 backdrop-blur-lg transition-all duration-500 ease-in-out overflow-hidden",
-          isOpen ? "max-h-screen" : "max-h-0"
+          "fixed top-20 left-0 w-full lg:hidden bg-deep-purple/98 backdrop-blur-lg transition-all duration-500 ease-in-out z-40 border-b border-white/10",
+          isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4"
         )}
+        style={{
+          maxHeight: isOpen ? "calc(100vh - 5rem)" : "0",
+          overflow: isOpen ? "auto" : "hidden"
+        }}
       >
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col space-y-2 mb-6">
@@ -170,8 +184,8 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "px-4 py-3 text-lg font-medium rounded-lg",
-                  pathname === link.href ? "bg-electric-blue/10 text-electric-blue" : "text-star-white/80 hover:bg-electric-blue/5 hover:text-electric-blue"
+                  "px-4 py-4 text-lg font-medium rounded-lg transition-all duration-200 min-h-[48px] flex items-center",
+                  pathname === link.href ? "bg-electric-blue/10 text-electric-blue" : "text-star-white/80 hover:bg-electric-blue/5 hover:text-electric-blue active:bg-electric-blue/10"
                 )}
               >
                 {link.label}
@@ -179,20 +193,20 @@ export function Navbar() {
             ))}
             <Link
               href="/#roi-calculator"
-              className="px-4 py-3 text-lg font-medium text-star-white/80 hover:bg-electric-blue/5 hover:text-electric-blue rounded-lg"
+              className="px-4 py-4 text-lg font-medium text-star-white/80 hover:bg-electric-blue/5 hover:text-electric-blue active:bg-electric-blue/10 rounded-lg transition-all duration-200 min-h-[48px] flex items-center"
             >
               ROI Calculator
             </Link>
           </div>
 
           <div className="flex flex-col space-y-3 pt-4 border-t border-white/10">
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="min-h-[48px]">
               <Link href="/contact" className="flex items-center justify-center w-full">
                 <Sparkles size={16} className="mr-2" />
                 Get Free Growth Plan
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="min-h-[48px]">
               <Link href="/pricing" className="w-full">View Pricing</Link>
             </Button>
           </div>
